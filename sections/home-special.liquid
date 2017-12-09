@@ -1,0 +1,210 @@
+<section class="section section--black <!--section--alt-->">
+  <div class="section__group">
+    <div class="widgets-alt row">
+      <div class="widget-background col--1of2 fullsize-image" style="background-image: url({{ section.settings.shop_1_background | img_url:'1000x' }});">
+        <div class="card">
+          <div class="card__content">
+            <img src="{{ section.settings.shop_1_logo | img_url:'380x' }}" alt="" width="380" height="145" class="card__logo hidden-xs">
+
+            <img src="{{ section.settings.shop_1_mobile_logo | img_url:'192x' }}" alt="" width="192" height="85" class="card__logo visible-xs-block">
+
+            {{ section.settings.shop_1_description }}
+
+            <a href="{{ section.settings.shop_1_url }}" class="link-primary card__link">{{ section.settings.shop_1_link_text }}</a>
+          </div><!-- /.card__content -->
+        </div><!-- /.card -->
+      </div><!-- /.widget-background widget-background-/-1of2 -->
+
+      <div class="widget-background col--1of2 fullsize-image" style="background-image: url({{ section.settings.shop_2_background | img_url:'1000x' }});">
+        <div class="card card--alt">
+          <div class="card__content">
+            <img src="{{ section.settings.shop_2_logo | img_url:'380x' }}" alt="" width="346" height="112" class="card__logo hidden-xs">
+
+            <img src="{{ section.settings.shop_2_mobile_logo | img_url:'192x' }}" alt="" width="191" height="60" class="card__logo visible-xs-block">
+
+            {{ section.settings.shop_2_description }}
+
+            <a href="{{ section.settings.shop_2_url }}" class="link-primary card__link">{{ section.settings.shop_2_link_text }}</a>
+          </div><!-- /.card__content -->
+        </div><!-- /.card -->
+      </div><!-- /.widget-background widget-background-/-1of2 -->
+    </div><!-- /.widgets-alt -->
+  </div><!-- /.section__group -->
+
+  <div class="section__group row">
+    <div class="box box--center box--small col--1of2 sticky-section__element">
+      <div class="box__image fullsize-image" style="background-image: url({{ section.settings.blog_background | img_url: '1000x' }});"></div><!-- /.box__image fullsize-image -->
+
+      <div class="box__content">
+        <h6>{{ section.settings.blog_small_header }}</h6>
+
+        <img src="{{ section.settings.blog_logo | img_url: '375x'}}" alt="" width="375" height="269" class="box__logo">
+
+        <div class="link-primary box__link"><a href="{{ section.settings.blog_url }}">{{ section.settings.blog_link_text }}</a></div><!-- /.link-primary -->
+      </div><!-- /.box__content -->
+    </div><!-- /.box -->
+
+    <div class="articles row col--1of2">
+      {% for article in blogs[section.settings.blog_widget_select].articles limit:5 %}
+        <div class="article {% if forloop.last %} article--large{% else %} col--1of2{% endif %}">
+          <div class="article__image">
+            <a href="#">
+              <img src="{% if article.image %}{{ article | img_url: 'large' }}{% endif %}" alt="" width="360" height="456">
+            </a>
+          </div><!-- /.article__image -->
+
+          <div class="article__content">
+            <h5 class="article__meta">
+              <a href="{{ blogs[section.settings.blog_widget_select].url }}">{{ blogs[section.settings.blog_widget_select].title }}</a>
+            </h5>
+
+            <h4>
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h4>
+          </div><!-- /.article__content -->
+        </div><!-- /.article col-/-1of2 -->
+      {% endfor %}
+    </div><!-- /.articles -->
+  </div><!-- /.section__group -->
+
+  <div class="section__group section__group--alt row hide">
+    <div class="box col--1of2">
+      <div class="box__image fullsize-image" style="background-image: url({{ section.settings.bottom_left_image | img_url: '1000x' }});"></div><!-- /.box__image fullsize-image -->
+    </div><!-- /.box -->
+
+    <div class="box col--1of2">
+      <div class="box__image fullsize-image" style="background-image: url({{ section.settings.bottom_right_image | img_url: '1000x' }});"></div><!-- /.box__image fullsize-image -->
+    </div><!-- /.box -->
+  </div><!-- /.section__group -->
+</section><!-- /.section section-/-black-->
+{% schema %}
+  {
+    "name": "Home Special",
+    "settings": [
+		{
+			"type": "header",
+			"content": "Visit Shop"
+		},
+		{
+			"type": "image_picker",
+			"id": "shop_1_background",
+			"label": "Shop 1 Background"
+		},
+		{
+			"type": "image_picker",
+			"id": "shop_1_logo",
+			"label": "Shop 1 Logo"
+		},
+		{
+			"type": "image_picker",
+			"id": "shop_1_mobile_logo",
+			"label": "Shop 1 Logo Mobile"
+		},
+		{
+			"type": "richtext",
+			"id": "shop_1_description",
+			"label": "Shop 1 Description"
+		},
+		{
+			"type": "text",
+			"id": "shop_1_link_text",
+			"label":"Shop 1 Link Text"
+		},
+		{
+			"type": "text",
+			"id": "shop_1_url",
+			"label": "Shop 1 Url"
+		},
+		{
+			"type": "image_picker",
+			"id": "shop_2_background",
+			"label": "Shop 2 Background"
+		},
+		{
+			"type": "image_picker",
+			"id": "shop_2_logo",
+			"label": "Shop 2 Logo"
+		},
+		{
+			"type": "image_picker",
+			"id": "shop_2_mobile_logo",
+			"label": "Shop 2 Logo Mobile"
+		},
+		{
+			"type": "richtext",
+			"id": "shop_2_description",
+			"label": "Shop 2 Description"
+		},
+		{
+			"type": "text",
+			"id": "shop_2_link_text",
+			"label":"Shop 2 Link Text"
+		},
+		{
+			"type": "text",
+			"id": "shop_2_url",
+			"label": "Shop 2 Url"
+		},
+		{
+			"type": "header",
+			"content": "Blog Section"
+		},
+		{
+			"type": "image_picker",
+			"id": "blog_background",
+			"label": "Background"
+		},
+		{
+			"type":"text",
+			"id": "blog_small_header",
+			"label": "Small Headline"
+		},
+		{
+			"type": "image_picker",
+			"id": "blog_logo",
+			"label": "Blog Logo"
+		},
+		{
+			"type": "text",
+			"id": "blog_link_text",
+			"label":  "Link Text"
+		},
+		{
+			"type": "url",
+			"id":"blog_url",
+			"label": "Blog Url"
+		},
+		{
+			"type": "blog",
+			"id": "blog_widget_select",
+			"label": "Blog"
+		},
+		{
+			"type": "header",
+			"content": "Other"
+		},
+		{
+			"type": "image_picker",
+			"id": "bottom_left_image",
+			"label": "Bottom Left Image"
+		},
+		{
+			"type": "image_picker",
+			"id": "bottom_right_image",
+			"label": "Bottom Right Image"
+		}
+	],
+    "presets": [
+        {
+            "name": "Home Special",
+            "category": "Homepage"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

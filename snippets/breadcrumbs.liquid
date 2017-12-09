@@ -1,0 +1,40 @@
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
+
+<nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
+  <ul>
+    <li>
+      <a href="/" title="Home">Home</a>
+    </li>
+    <li>
+      {% if template contains 'page' %}
+        <a href="#">{{ page.title }}</a>
+      {% elsif template contains 'product' %}
+        {% if collection.url %}
+      		<a href="#">{{ collection.title | link_to: collection.url }}</a>
+        {% endif %}
+        <a href="#">{{ product.title }}</a>
+      {% elsif template contains 'collection' and collection.handle %}
+        {% if current_tags %}
+          {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      		<a href="#">{{ collection.title | link_to: url }}</a>
+          <a href="#">{{ current_tags | join: " + " }}</a>
+        {% else %}
+          <a href="#">{{ collection.title }}</a>
+        {% endif %}
+      {% elsif template == 'blog' %}
+        {% if current_tags %}
+          {{ blog.title | link_to: blog.url }}
+          <a href="#">{{ current_tags | join: " + " }}</a>
+        {% else %}
+        <a href="#">{{ blog.title }}</a>
+        {% endif %}
+      {% elsif template == 'article' %}
+        {{ blog.title | link_to: blog.url }}
+        <a href="#">{{ article.title }}</a>
+      {% else %}
+       <a href="#">{{ page_title }}</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+{% endunless %}

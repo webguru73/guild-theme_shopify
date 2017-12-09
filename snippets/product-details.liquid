@@ -1,0 +1,55 @@
+{% assign item_dimensions = product.description | split: "~Item Dimensions~" | last | split: "~Country Of Origin~" | first %}
+{% assign country_of_origin = product.description | split: "~Country Of Origin~" | last | split: "~Package Dimensions~" | first %}
+{% assign package_dimensions = product.description | split: "~Package Dimensions~" | last | split: "~Care~" | first %}
+{% assign care = product.description | split: "~Care~" | last | split: "~SHIPPING~" | first %}
+{% assign shipping = product.description | split: "~SHIPPING~" | last %}
+
+<ul class="list-items list-items--alt">
+  {% if item_dimensions %}
+    <li>
+      <h6>Item Dimensions</h6>
+
+      <h5>{{ item_dimensions }}</h5>
+    </li>
+  {% endif %}
+  
+  {% if current_variant.weight >= 0 %}
+    <li>
+      <h6>Package Weight</h6>
+
+      <h5>{{current_variant.weight | weight_with_unit }}</h5>
+    </li>
+  {% endif %}
+  
+  {% if country_of_origin %}
+    <li>
+      <h6>Country Of Origin</h6>
+
+      <h5>{{ country_of_origin }}</h5>
+    </li>
+  {% endif %}
+  
+  {% if package_dimensions != blank %}
+    <li>
+      <h6>PACKAGE DIMENSIONS</h6>
+
+      <h5>{{ package_dimensions }}</h5>
+    </li>
+  {% endif %}
+  
+  {% if care %}
+    <li>
+      <h6>Care</h6>
+
+      <h5>{{ care }}</h5>
+    </li>
+  {% endif %}
+  
+  {% if shipping %}
+    <li>
+      <h6>Shipping</h6>
+
+      <h5>{{ shipping }}</h5>
+    </li>
+  {% endif %}
+</ul><!-- /.list-items -->

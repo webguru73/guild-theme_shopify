@@ -1,0 +1,258 @@
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+<div data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+
+  <div class="intro">
+    <figure class="intro__image fullsize-image" style="background-image: url({{ product.featured_image | img_url: 'master'}}"></figure><!-- /.intro__image -->
+  </div><!-- /.intro -->
+
+  <section class="section-secondary">
+    <div class="shell shell--secondary">
+      <div class="section__inner">
+        <div class="section__content">
+
+          {% include 'breadcrumbs' %}
+
+          <h2>{{ product.title }}</h2>
+			{{ product.description | split:"~section 1~" | first}}
+        </div><!-- /.section__content -->
+
+        <aside class="section__aside">
+<!--           <strong class="price">FROM USD {{ product.price | money_without_trailing_zeros | split:'$' | last}}</strong> -->
+
+          {{ product.description | split: "~section 1~" | last | split: "~section 2~" | first }}
+		<a href="#popup-inquire" class="link-primary link-primary--alt popup-link">Inquire</a>
+        </aside><!-- /.section__aside -->
+      </div><!-- /.section__inner -->
+    </div><!-- /.shell shell-/-secondary -->
+  </section><!-- /.section-secondary -->
+
+  <section class="section-gallery section--black">
+    <div class="gallery-items">
+      <div class="cols">
+        <div class="col col--size-5">
+          {% if product.images[1] %}
+            <div class="gallery-item">
+              <div class="gallery-item__content">
+                {{ product.description | split: "~section 2~" | last | split: "~section 3~" | first }}
+              </div><!-- /.gallery-item__content -->
+            </div><!-- /.gallery-item -->
+
+            <div class="gallery-item">
+              <figure class="gallery-item__image">
+
+                <a href="{{ product.images[1] | img_url:'master' }}">
+                  <img src="{{ product.images[1] | img_url:'master' }}" alt="">
+                  {{ product.description | split: "~section 2~" | last | split: "~section 3~" | first }}
+                </a>
+              </figure><!-- /.gallery-item__image -->
+            </div><!-- /.gallery-item -->
+          {% endif %}
+          {% if product.images[3]%}
+            <div class="gallery-item gallery-item--medium">
+              <div class="gallery-item__content">
+                {% assign author_quote = product.description | split: "~section 4~" | last | split: "~section 5~" | first %}
+                {{ author_quote }}
+                {% if author_quote contains '“' %}
+                <span class="gallery-item__name">NAME GOES HERE</span>
+                {% endif %}
+              </div><!-- /.gallery-item__content -->
+            </div><!-- /.gallery-item -->
+          {% endif %}
+        </div><!-- /.col col-/-size-5 -->
+        <div class="col col--size-6">
+          {% if product.images[2]%}
+          <div class="gallery-item">
+            <figure class="gallery-item__image">
+              <a href="{{ product.images[2] | img_url:'master' }}">
+                <img src="{{ product.images[2] | img_url:'master' }}" alt="">
+              </a>
+            </figure><!-- /.gallery-item__image -->
+          </div><!-- /.gallery-item -->
+          {% endif %}
+          
+          {% if product.images[1]%}
+          <div class="gallery-item gallery-item--alt gallery-item--small">
+            <div class="gallery-item__content">
+              {{ product.description | split: "~section 3~" | last | split: "~section 4~" | first }}
+            </div><!-- /.gallery-item__content -->
+          </div><!-- /.gallery-item -->
+          {% endif %}
+          
+          {% if product.images[3]%}          
+          <div class="gallery-item">
+            <figure class="gallery-item__image">
+              <a href="{{ product.images[3] | img_url:'master' }}">
+                <img src="{{ product.images[3] | img_url:'master' }}" alt="">
+                {{ product.description | split: "~section 3~" | last | split: "~section 4~" | first }}
+              </a>
+            </figure><!-- /.gallery-item__image -->
+          </div><!-- /.gallery-item -->
+          {% endif %}
+        </div><!-- /.col col-/-size-6 -->
+      </div><!-- /.cols -->
+    </div><!-- /.gallery-items -->
+    
+    {% if product.images[4] %}
+      <div class="gallery-items gallery-item--alt">
+        <div class="gallery-item gallery-item--large cols">
+          <figure class="gallery-item__image col col--1of2">
+            <a href="{{ product.images[4] | img_url:'master' }}">
+              <img src="{{ product.images[4] | img_url:'master' }}" alt="">
+              {{ product.description | split: "~section 5~" | last | split: "~Item Dimensions~" | first }}
+            </a>
+          </figure><!-- /.gallery-item__image -->
+
+          <div class="gallery-item__content col col--1of2">
+            {{ product.description | split: "~section 5~" | last | split: "~Item Dimensions~" | first }}
+          </div><!-- /.gallery-item__content -->
+        </div><!-- /.gallery-item -->
+      </div><!-- /.gallery-items -->
+    {% endif %}
+
+    <footer class="section__foot">
+      {% comment %}
+      <div class="shell shell--secondary">
+        {% if product.images[4] %}
+          <div class="section__foot-image">
+            <img src="{{ product.images[5] | img_url:'master' }}" alt="">
+          </div><!-- /.section__foot-image -->
+        {% endif %}
+<!--         <h6>{{ product.title }} STARTS AT</h6>
+        <h1>{{ product.price | money_without_trailing_zeros | split:'$' | last}} USD</h1> -->
+      </div><!-- /.shell -->
+      {% endcomment %}
+      <div class="slider custom-products-images-slider">
+        <div class="slider__clip">
+          <div class="slider__slides">
+            {% for image in product.images %}
+            <div class="slider__slide">
+              <div class="slider__slide-image">
+                 <img src="{{ image | img_url:'master' }}" alt="">
+              </div><!-- /.slider__slide-image -->
+            </div><!-- /.slider__slide -->
+            {% endfor %}
+          </div><!-- /.slider__slides -->
+        </div><!-- /.slider__clip -->
+      </div><!-- /.slider -->
+<!--        <h6>{{ product.title }} STARTS AT</h6>
+        <h1>{{ product.price | money_without_trailing_zeros | split:'$' | last}} USD</h1> -->
+    </footer><!-- /.section__foot -->
+
+  </section><!-- /.section-gallery -->
+
+  <section class="section-material">
+    <div id="customize_products" class="section__content">
+      <div class="shell shell--secondary">
+        {% for option in product.options_with_values %}
+        <div class="section__group">
+          <header class="section__head">
+            <h4>{{ option.name }}</h4>
+
+            <p>Description quis nihil im illam, to ius et ex eiur antetures re nonem facepudi at.</p>
+          </header><!-- /.section__head -->
+
+          <div class="section__body">
+            <ul class="list-materials">
+              {% for value in option.values %}
+              <li>
+                <a href="#">
+                  <span>{{ value }}</span>
+
+                  <i class="ico-zoom"></i>
+
+                  <img src="css/images/temp/material-leather-image1.jpg" alt="">
+                </a>
+              </li>
+              {% endfor %}
+            </ul><!-- /.list-materials -->
+
+            <div class="section__actions">
+              <!--                 <a href="#" class="link-primary link-primary--alt">Show More</a> -->
+            </div><!-- /.section__actions -->
+          </div><!-- /.section__body -->
+        </div><!-- /.section__group -->
+        {% endfor %}
+
+      </div><!-- /.shell shell-/-secondary -->
+    </div><!-- /.section__content -->
+
+  </section><!-- /.section-material -->
+
+  <section class="section-product section--black">
+    <div class="shell shell--secondary">
+      {% include "product-details" %}
+
+      <div class="product">
+        <figure class="product__image">
+          <img src="{{ product.featured_image | img_url: 'master'}}" alt="">
+        </figure><!-- /.product__image -->
+
+        <div class="product__content">
+          <div class="product__body">
+            <h2>{{ product.title }}</h2>
+            <div class="product__actions">
+<!--               <span class="product__price">Starting AT USD {{ product.price | money_without_trailing_zeros | split:'$' | last}}</span> -->
+
+              <div class="product__actions-aside">
+                <span>This item in available in a wide variety of combinations. <br> Please call us at 212-123-4567 or use the inquiry link below.</span>
+
+              <a href="#popup-inquire" class="link-primary link-primary--alt popup-link">Inquire</a>
+            </div><!-- /.product__actions-aside -->
+          </div><!-- /.product__actions -->
+
+        </div><!-- /.product__body -->
+        <ul class="list-materials-secondary">
+          <span>As pictured to the left:</span>
+          <li>
+            <h6>Timber</h6>
+
+            <h5>Medium Oak</h5>
+          </li>
+
+          <li>
+            <h6>Leather</h6>
+
+            <h5>Smoked</h5>
+          </li>
+        </ul><!-- /.list-materials-secondary -->
+      </div><!-- /.product__content -->
+    </div><!-- /.product -->
+	
+      {% include "product-featured-article" %}
+    
+    </div><!-- /.shell shell-/-secondary -->
+  </section><!-- /.section-product -->
+</div>
+
+{% include "product-inquire-form" %}
+
+{% schema %}
+{
+  "name": "Product",
+  "class": "produt-custom_pieces",
+  "settings": [
+
+  ],
+  "blocks": [
+  	{
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "content_article",
+          "label": "Article"
+        }
+      ]
+    }
+  ]
+
+ }
+{% endschema %}

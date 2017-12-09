@@ -1,0 +1,74 @@
+<section class="section page-about">
+  <div class="boxes row">
+    <div class="box col">
+      <div class="box__image fullsize-image" style="background-image: url(https://cdn.shopify.com/s/files/1/1800/7315/files/box1_320fbda3-f9b0-4348-9cc2-c16e139854c7.jpg?5727914302134212126);"></div><!-- /.box__image fullsize-image -->
+
+      <div class="box__content box__hero_content">
+
+        {{ page.content | split: "~section 1~" | first }}
+
+      </div><!-- /.box__content -->
+    </div><!-- /.box -->
+
+    <div id="about_row_1">
+      <div class="box box--center box--white col--1of2">
+        <div class="box__image fullsize-image"></div><!-- /.box__image fullsize-image -->
+
+        <div class="box__content">
+
+          {{ page.content | split: "~section 1~" | last | split: '~section 2~' | first }}
+
+          <a href="https://romanandwilliams.com" class="link-primary box__link">Visit Roman And Williams</a>
+        </div><!-- /.box__content -->
+      </div><!-- /.box -->
+
+      <div class="box col--1of2">
+        <div class="box__image fullsize-image" style="background-image:url({{ 'card1.jpg' | asset_img_url:'master' }});"></div><!-- /.box__image fullsize-image -->
+
+        <div class="box__content">
+
+        </div><!-- /.box__content -->
+      </div><!-- /.box -->
+    </div>
+
+    <div>
+      <div class="box col--1of2">
+        <div class="box__image fullsize-image" style="background-image:url({{ 'about2.jpg' | asset_img_url:'master' }});"></div><!-- /.box__image fullsize-image -->
+
+        <div class="box__content">
+
+        </div><!-- /.box__content -->
+      </div><!-- /.box -->
+
+      <div class="box box--center box--white col--1of2">
+        <div class="box__image fullsize-image"></div><!-- /.box__image fullsize-image -->
+
+        <div class="box__content">
+
+          {{ page.content | split: "~section 2~" | last | split: '~section 3~' | first }}
+
+        </div><!-- /.box__content -->
+      </div><!-- /.box -->
+    </div>
+
+    <div id="about_row_3">
+      <div class="box box--center box--white col--1of2">
+        <div class="box__image fullsize-image"></div><!-- /.box__image fullsize-image -->
+
+        <div class="box__content">
+
+          {{ page.content | split: "~section 3~" | last | split: '~section 4~' | first }}
+
+        </div><!-- /.box__content -->
+      </div><!-- /.box -->
+
+      <div class="box col--1of2">
+        <div class="box__image fullsize-image" style="background-image:url({{ 'about3.jpg' | asset_img_url:'master' }});"></div><!-- /.box__image fullsize-image -->
+
+        <div class="box__content">
+
+        </div><!-- /.box__content -->
+      </div><!-- /.box -->
+    </div>
+  </div><!-- /.boxes -->
+</section><!-- /.section -->

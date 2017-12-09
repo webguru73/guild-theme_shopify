@@ -1,0 +1,104 @@
+<form action="/cart/add" method="post" id="add_to_cart_form" enctype="multipart/form-data">
+  <div class="product product--alt">
+    <figure class="product__image">
+      <img src="{{ product.featured_image | product_img_url: 'master' }}" alt="">
+    </figure><!-- /.product__image -->
+    <select name="id" id="product-select" class="no-js" data-product-select>
+      {% for variant in product.variants %}
+      <option
+              {% if variant == current_variant %}selected="selected"{% endif %}
+              {% unless variant.available %}disabled="disabled"{% endunless %}
+              value="{{ variant.id }}">
+        {{ variant.title }}
+      </option>
+      {% endfor %}
+    </select>
+    <div class="product__content">
+      <div class="product__body">
+        <h2>
+          {{ product.title }}
+        </h2>
+
+        <div class="form form-product">
+          <form action="?" method="post">
+            <div class="form__body">
+              <div class="form__row form__row--alt">
+                <div class="form__controls form__controls--alt">
+                  <input type="text" class="field" name="quantity" id="field-qty" value="1" placeholder="{{ 'products.product.quantity' | t }}" min= "1" >
+                  
+                  <div class="select">
+                    {% for option in product.options_with_values %}
+                    <div class="selector-wrapper js">
+                      <label for="SingleOptionSelector-{{ forloop.index0 }}">
+                        {{ option.name }}
+                      </label>
+                      <select
+                              id="SingleOptionSelector-{{ forloop.index0 }}"
+                              data-single-option-selector
+                              data-index="option{{ option.position }}">
+                        {% for value in option.values %}
+                        <option
+                                value="{{ value | escape }}"
+                                {% if option.selected_value == value %}selected="selected"{% endif %}>
+                          {{ value }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    {% endfor %}
+                    
+                  </div><!-- /.select -->
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+              
+              {% if product.options contains "Color" or product.options contains "color" %}
+              <div class="form__row">
+                  <label class="form__label">Select A Color</label>
+                  {% include 'panda-swatch' with 'product' %}
+              </div><!-- /.form__row -->
+              {% endif %}
+
+            </div><!-- /.form__body -->
+          </form>
+        </div><!-- /.form-product -->
+      </div><!-- /.product__body -->
+
+      <div class="product__actions">
+        <span class="product__price">USD {{ product.price | money_without_trailing_zeros | split:'$' | last}}</span>
+        
+        {% if current_variant.available %}
+          <button
+                  type="submit"
+                  name="add"
+                  class="btn"
+                  data-add-to-cart
+                  >
+            <span data-add-to-cart-text>
+              {{ 'products.product.add_to_cart' | t }}
+            </span>
+          </button>
+        {% else %}
+          <button
+                  type="submit"
+                  name="add"
+                  class="btn btn--blue btn--out-stock"
+                  data-add-to-cart
+                  disabled>
+            <span data-add-to-cart-text>
+              {{ 'products.product.sold_out' | t }}
+            </span>
+          </button>
+        	{% include "product-sold_out-form"%}
+          
+        {% endif %}
+        
+      </div><!-- /.product__actions -->
+    </div><!-- /.product__content -->
+  </div><!-- /.product -->
+</form>
+
+{% unless product == empty %}
+<script type="application/json" data-product-json>
+      {{ product | json }}
+</script>
+{% endunless %}

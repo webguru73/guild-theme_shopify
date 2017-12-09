@@ -1,0 +1,147 @@
+{%- assign small_heading = section.settings.small_title -%}
+{%- assign main_heading = section.settings.main_title -%}
+{%- assign collection = collections[section.settings.collection] -%}
+{%- assign enable_description = section.settings.show_description -%}
+{%- assign link_text = section.settings.link_text -%}
+
+<section class="section-primary {% unless enable_description %} section-primary--center {% endunless%}">
+  <header class="section__head">
+    <div class="shell">
+      <div class="{% if enable_description %}section__head-inner{% endif %}">
+        <div class="section__head-aside">
+          <h6>{{ small_heading }}</h6>
+
+          <h3 class="section__title"><a href="{{ collection.url }}">{% if main_heading %} {{ main_heading }} {% endif %}</a></h3>
+        </div><!-- /.section__head-aside -->
+		
+        {% if enable_description %} 
+        <div class="section__head-content">
+            {{ collection.description }}
+          <a href="{{ collection.url }}" class="link-primary section__link">{{ link_text }}</a>
+        </div><!-- /.section__head-content -->
+        {% endif %}
+      </div><!-- /.section__head-inner -->
+    </div><!-- /.shell -->
+  </header><!-- /.section__head -->
+
+  <div class="section__body">
+    <div class="slider-animated">
+      <div class="slider__clip">
+        <div class="slider__slides widgets">
+          {% for product in collection.products %}
+            <div class="slider__slide">
+              <div class="widget first">
+                <div class="widget__image">
+                  {% if product.featured_image != blank %}
+                  	{{ product.images[2].src | img_url:"500x" | img_tag: product.title }}
+                  {% endif %}
+<!--                   <img src="css/images/temp/widget1-hover.jpg" alt="" width="398" height="543" class="widget__image--hover"> -->
+                </div><!-- /.widget__image -->
+
+                <div class="widget__content">
+                  <a href="{{ product.url | within: collection }}">
+                    <h5>
+                      {{ product.title }}
+                    </h5>
+                  </a>
+                </div><!-- /.widget__content -->
+              </div><!-- /.widget -->
+            </div><!-- /.slider__slide -->
+          {% endfor %}
+        </div><!-- /.slider__slides -->
+      </div><!-- /.slider__clip -->
+    </div><!-- /.slider -->
+  </div><!-- /.section__body -->
+</section><!-- /.section-primary -->
+
+{% comment %}
+{% for product in collection.products limit: 6 %}
+  <a href="{{ product.url | within: collection }}">
+
+    {% if product.featured_image != blank %}
+      {{ product.featured_image.src | img_url: '480x480' | img_tag: product.title }}
+    {% endif %}
+
+    <p>{{ product.title }}</p>
+  </a>
+
+  <p>
+    {% if product.compare_at_price > product.price %}
+
+      {% if product.price_varies %}
+        {%- assign sale_price = product.price | money -%}
+        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+      {% else %}
+        {{ 'products.product.on_sale' | t }}
+        {{ product.price | money }}
+      {% endif %}
+
+    {% else %}
+
+      {% if product.price_varies %}
+        {%- assign price = product.price | money -%}
+        {{ 'products.product.from_text_html' | t: price: price }}
+      {% else %}
+        {{ product.price | money }}
+      {% endif %}
+
+    {% endif %}
+  </p>
+{% else %}
+
+  {% for i in (1..6) %}
+    <a href="#">
+      {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+      {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+
+      <p>
+        {{ 'homepage.onboarding.product_title' | t }}
+      </p>
+    </a>
+
+    <p>{{ 1999 | money }}</p>
+  {% endfor %}
+{% endfor %}
+{% endcomment %}
+{% schema %}
+{
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "small_title",
+        "label": "Small Heading",
+        "default": "CURATED"
+      },
+	  {
+        "type": "text",
+        "id": "main_title",
+        "label": "Main Heading"
+      },
+      {
+      	"type": "checkbox",
+      	"id": "show_description",
+      	"label": "Enable description",
+      	"default": true,
+      	"info": "Show Collection Description and Link"
+      },
+	  {
+		"type": "text",
+		"id": "link_text",
+   		"label": "Link Text"
+	  },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}

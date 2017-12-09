@@ -1,0 +1,334 @@
+<style>
+  {% if section.settings.logo != blank %}
+    .site-header__logo-image {
+      max-width: {{ section.settings.logo_max_width }}px;
+    }
+  {% endif %}
+  .header.fixed .logo{
+    background-image: url({{'logo-fixed_2x.png' | asset_url }})!important;
+    background-size: cover!important;
+  }
+  @media (max-width: 768px){
+    .logo{
+      background-image: url({{ section.settings.mobile_logo | img_url: '250x' }})!important;
+    }
+  }
+</style>
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  <header class="main_header header {% unless template contains 'index' or template contains "page" or template contains "product" or template contains "collection.with_image"%} not--fixed {% if template contains "cart" %}header--white{% endif %} header--alt{% endunless %}">
+    <div class="header__inner">
+      <a href="#" class="nav-toggle js-nav-toggle visible-xs-inline-block">Menu</a>
+
+      <a href="/" class="logo {% unless template contains 'index' or template contains "page" or template contains "product.community" or template contains "collection.with_image" %}logo--dark{% endunless %}{% if template contains "page.faqstyle" or template contains "page.contact" %} logo--dark {%endif%}" style="background: url({{ section.settings.logo | img_url:'master' }}) no-repeat 0 0; background-size: cover">roman and Williams <strong>Guild</strong> New York</a>
+      
+      <nav class="nav {% unless template contains 'index' or template contains "page" or template contains "product.community" or template contains "collection.with_image"%} nav--dark {% endunless %} {% if template contains "page.faqstyle" or template contains "page.contact" %} nav--dark {%endif%}" role="navigation">
+<!--         <a href="#" class="link-close js-nav-toggle visible-xs-inline-block"></a> -->
+
+        <ul class="site-nav has-dropdown">
+          {% for link in linklists[section.settings.main_left_linklist].links %}
+            {%- assign child_list_handle = link.title | handleize -%}
+            <li {% if link.active %}class="site-nav--active"{% endif %}>
+              <a href="{{ link.url }}" class="site-nav__link parent">{{ link.title }}</a>
+              <ul class="site-nav__submenu">
+                {% for childlink in menus[child_list_handle].links %}
+                <li {% if childlink.active %}class="site-nav--active"{% endif %}>
+                  <a href="{{ childlink.url }}" class="">{{ childlink.title | escape }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <ul class="site-nav">
+          {% for link in linklists[section.settings.main_right_linklist].links %}
+            <li {% if link.active %}class="site-nav--active"{% endif %}>
+              <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+
+          <li class=" small--hide">
+            <a href="/cart" class="cart">Cart <span>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span></a>
+          </li>
+        </ul>
+        <div class="top_insignia  visible-xs-block">
+          <img src="{{ 'bottom_insignia.png' | asset_url }}">
+        </div>
+      </nav><!-- /.nav -->
+      
+      <!-- Mobile Cart --><a href="/cart" class="cart visible-xs-inline-block">Cart <span>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span></a>
+
+    </div><!-- /.header__inner -->
+  </header><!-- /.header -->
+  
+  <div class="mega_nav_wrapper small--hide">
+    <header class="header not--fixed header--alt" style="position: relative!important;">
+      <div class="header__inner">
+        <a href="#" class="nav-toggle js-nav-toggle visible-xs-inline-block">Menu</a>
+
+        <a href="/" class="logo logo--dark" style="background: url({{ section.settings.logo | img_url:'master' }}) no-repeat 0 0; background-size: cover">roman and Williams <strong>Guild</strong> New York</a>
+
+        <nav class="nav nav--dark " role="navigation">
+          <a href="#" class="link-close js-nav-toggle visible-xs-inline-block"></a>
+
+          <ul class="site-nav has-dropdown">
+            {% for link in linklists[section.settings.main_left_linklist].links %}
+            <li class="{% if link.active %}site-nav--active {% endif %}">
+              <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+
+          <ul class="site-nav">
+            {% for link in linklists[section.settings.main_right_linklist].links %}
+            <li {% if link.active %}class="site-nav--active"{% endif %}>
+              <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+            </li>
+            {% endfor %}
+
+            <li>
+              <a href="/cart" class="cart">Cart <span>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span></a>
+            </li>
+          </ul>
+        </nav><!-- /.nav -->
+        
+      </div><!-- /.header__inner -->
+    </header><!-- /.header -->
+    <div class="dropdown_container inventory" data-dropdown="inventory">
+      <div class="grid">
+        {% for childlink in menus['inventory'].links %}
+          <ul class="grid__item medium-up--one-sixth">
+            <li class="sub_category--title">{{ childlink.title }}</li>
+            {%- assign sub_childlink = childlink.title | handleize -%}
+            {% for subchildlink in menus[sub_childlink].links %}
+            <li class=""><a href="{{ subchildlink.url }}">{{ subchildlink.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="dropdown_container visit" data-dropdown="visit">
+      <div class="grid">
+        {% for i in (1..3) %}
+          <div class="grid__item one-third mega_menu--item">
+            {% assign page_id = 'visit_page_' | append: i %}
+            {% assign page_handle = section.settings[page_id] %}
+            {% assign image_id = page_id | append: '_img' %}
+            {%comment%}<a href="{{ pages[page_handle].url }}" {% if i == 2 %} target="_blank" {% endif %}>{%endcomment%}
+            <a href="{{ pages['visit'].url }}" {% if i == 2 %} target="_blank" {% endif %}>
+              <div class="page-featured__image">
+                <img src="{{ section.settings[image_id] | img_url:'500x' }}" >
+              </div>
+              <p>{{ pages[page_handle].title }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="dropdown_container explore" data-dropdown="explore">
+      <div class="grid">
+        {% for i in (1..3) %}
+        <div class="grid__item one-third mega_menu--item">
+          {% assign page_id = 'explore_page_' | append: i %}
+          {% assign page_handle = section.settings[page_id] %}
+          {% assign image_id = page_id | append: '_img' %}
+          <a href="{% if i == 1 %}{{ section.settings.explore_page_1_link }}{% else %}{{ pages[page_handle].url }}{% endif %}">
+            <div class="page-featured__image">
+              <img src="{{ section.settings[image_id] | img_url:'500x' }}" >
+            </div>
+            <p>{% if i == 1 %}{{ section.settings.explore_page_1 }}{% else %}{{ pages[page_handle].title }}{% endif %}</p>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="top_insignia">
+      <img src="{{ 'bottom_insignia.png' | asset_url }}">
+    </div>
+  </div>
+  <header role="banner" class="hide">
+    {% if template.name == 'index' %}
+      <h1 itemscope itemtype="http://schema.org/Organization">
+    {% else %}
+      <div class="h1" itemscope itemtype="http://schema.org/Organization">
+    {% endif %}
+        <a href="/" itemprop="url" class="site-logo{% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+          {% if section.settings.logo != blank %}
+            {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+            <img src="{{ section.settings.logo | img_url: image_size }}"
+                 srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                 alt="{{ section.settings.logo.alt | default: shop.name }}"
+                 itemprop="logo">
+          {% else %}
+            {{ shop.name }}
+          {% endif %}
+        </a>
+    {% if template.name == 'index' %}
+      </h1>
+    {% else %}
+      </div>
+    {% endif %}
+
+    <a href="/cart">
+      {% include 'icon-cart' %}
+      {{ 'layout.cart.title' | t }}
+      ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
+    </a>
+
+    {% if shop.customer_accounts_enabled %}
+      <ul>
+        {% if customer %}
+          <li>
+            {% if customer.first_name != blank %}
+              {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+              {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+            {% else %}
+              <a href="/account">{{ 'layout.customer.account' | t }}</a>
+            {% endif %}
+          </li>
+          <li>
+            {{ 'layout.customer.log_out' | t | customer_logout_link }}
+          </li>
+        {% else %}
+          <li>
+            {{ 'layout.customer.log_in' | t | customer_login_link }}
+          </li>
+          <li>
+            {{ 'layout.customer.create_account' | t | customer_register_link }}
+          </li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+    <form action="/search" method="get" role="search">
+      <label for="Search" class="label-hidden">
+        {{ 'general.search.placeholder' | t }}
+      </label>
+      <input type="search"
+             name="q"
+             id="Search"
+             value="{{ search.terms | escape }}"
+             placeholder="{{ 'general.search.placeholder' | t }}">
+      <button type="submit" class="btn">
+        {% include 'icon-search' %}
+        <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+      </button>
+    </form>
+
+  </header>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+	  {
+        "type": "image_picker",
+        "id": "mobile_logo",
+        "label": "Mobile Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "min": 50,
+        "max": 450,
+        "step": 10,
+        "unit": "px",
+        "label": "Custom logo width",
+        "default": 250
+      },
+      {
+        "type": "link_list",
+        "id": "main_left_linklist",
+        "label": "Left Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "link_list",
+        "id": "main_right_linklist",
+        "label": "Right Menu",
+        "default": "main-menu"
+      },
+      {
+      	"type": "header",
+      	"content": "Visit - Dropdown Items"
+      },
+      {
+      	"type": "page",
+      	"id": "visit_page_1",
+      	"label": "Child Item 1"
+      },
+      {
+      	"type": "image_picker",
+      	"id": "visit_page_1_img",
+      	"label": "Child Item 1 Featured Image"
+      },
+      {
+      	"type": "page",
+      	"id": "visit_page_2",
+      	"label": "Child Item 2"
+      },
+      {
+      	"type": "image_picker",
+      	"id": "visit_page_2_img",
+      	"label": "Child Item 2 Featured Image"
+      },
+      {
+      	"type": "page",
+      	"id": "visit_page_3",
+      	"label": "Child Item 3"
+      },
+      {
+      	"type": "image_picker",
+      	"id": "visit_page_3_img",
+      	"label": "Child Item 3 Featured Image"
+      },
+      {
+      	"type": "header",
+      	"content": "Explore - Dropdown Items"
+      },
+      {
+      	"type": "text",
+      	"id": "explore_page_1_link",
+      	"label": "Child Menu 1 link"
+      },
+      {
+		"type": "text",
+		"id": "explore_page_1",
+      	"label": "Child Menu 1 Text"
+      },
+      {
+      	"type": "image_picker",
+      	"id": "explore_page_1_img",
+      	"label": "Child Menu 1 Featured Image"
+      },
+      {
+      	"type": "page",
+      	"id": "explore_page_2",
+      	"label": "Child Menu 2"
+      },
+      {
+      	"type": "image_picker",
+      	"id": "explore_page_2_img",
+      	"label": "Child Menu 2 Featured Image"
+      },
+      {
+      	"type": "page",
+      	"id": "explore_page_3",
+      	"label": "Child Menu 3"
+      },
+      {
+      	"type": "image_picker",
+      	"id": "explore_page_3_img",
+      	"label": "Child Menu 3 Featured Image"
+      }
+	  
+    ]
+  }
+{% endschema %}

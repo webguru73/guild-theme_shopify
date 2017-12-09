@@ -1,0 +1,93 @@
+{% for image in product.images %}
+{%- assign product_images = product_images | append: ',' | append: image.src -%}
+{% endfor %}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+{% assign product_image = product_images | split:',' %}
+<div data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+  <section class="section-intro section--black">
+    <div class="section__image" style="background-image: url({{ featured_image | img_url: "master" }});"></div><!-- /.section__image -->
+
+    <div class="section__inner">
+      <div class="section__content">
+        {% include 'breadcrumbs' %}
+
+        <h2>{{ product.title }}</h2>
+
+        <h3>by {{ product.vendor }}</h3>
+
+        {{ product.description | split: "~section 1~" | first }}
+
+        <div class="section__actions">
+          <span>Usd {{ product.price | money_without_trailing_zeros | split:'$' | last}}</span>
+
+          <a href="#add_to_cart_form" class="link-primary link-primary--alt">Acquire</a>
+        </div><!-- /.section__actions -->
+      </div><!-- /.section__content -->
+    </div><!-- /.section__inner -->
+
+    <footer class="section__foot">
+      <div class="shell shell--secondary">
+        <div class="section__foot-image">
+          <img src="{{ product_image[2] | product_img_url:'master' }}" alt="">
+        </div><!-- /.section__foot-image -->
+      </div>
+    </footer><!-- /.section__foot -->
+  </section><!-- /.section-intro -->
+
+  <section class="section-product section--black">
+    <div class="shell shell--secondary">
+      
+      {% include "product-details" %}
+
+      {% include "product-form" %}
+
+      <article class="article-tertiary hide">
+        <div class="article-aside">
+          <h3>
+            Design <br>
+            Shop <br>
+            Lorem Ipsu
+          </h3>
+        </div>
+        <div class="article-content">
+          
+          <p>Fugia dolorro est, ipis excesequis abor sit arum ipsandu ndunto es dolor rovid alicia dolende ndiciet quam aut earis none. Ibus disqui alibus alitecum qui dignis perorem. Nam eum esendici nemolum eos que con rempeliquid ut quatiis ma ent eume moVivis destilibus, condiuunt eum audis si nimus debit, ipsaepel impori ofcab orpore ipsam vollorepe con plab iduciur aliqui ullaut que sitatibus, etus dolo tenimaion pro torenih iliquam, occum facium fugiasim con exceatu mquatio in et autem. Et re il et videsci isitam volor amus es arum re pres eaquatio ma que et et aut lament dolo venda si cuptatur, cum corum ut ipsam, tectur? Quisci occae et erit esequo culluptatis vitatum sim faccum qui omnimEhenihit andis sit ut alia volupta turepelest, untia num quia eveniae catur? Hici unt perum faccus aces eossit, venim rendis.</p>
+
+          <p>Ria dolum quis et fugit, sus erumquisque eat hil idebis eum et parchiliquo. Em fugita acitiuntur res es expero doloreperum simod moditat istium, secto maxim sitae</p>
+        </div>
+      </article><!-- /.article-tertiary -->
+    </div><!-- /.shell shell-/-secondary -->
+  </section><!-- /.section-product -->
+
+
+  
+</div>
+{% schema %}
+{
+  "name": "Product",
+  "class": "produt-community",
+  "settings": [
+
+  ],
+  "blocks": [
+  	{
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "content_article",
+          "label": "Article"
+        }
+      ]
+    }
+  ]
+
+ }
+{% endschema %}

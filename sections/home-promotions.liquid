@@ -1,0 +1,145 @@
+<section class="section">
+  <div class="boxes row">
+    <div class="box col">
+      <div class="box__image fullsize-image" style="background-image: url({{ section.settings.hero_image | img_url: 'master' }});"></div><!-- /.box__image fullsize-image -->
+
+      <div class="box__content center_box__hero__content box__hero_content">
+        <h6>Welcome In</h6>
+
+        <h2>{{ section.settings.sub_title1 | remove: '<p>'  | remove: '</p>' }}</h2>
+
+        <p>{{ section.settings.text_overlay1 }}</p>
+      </div><!-- /.box__content -->
+    </div><!-- /.box -->
+
+    <div class="box box--center box--black col--1of2">
+      <div class="box__image fullsize-image"></div><!-- /.box__image fullsize-image -->
+
+      <div class="box__content">
+        <h6>Featured</h6>
+
+        <h2>{{ section.settings.sub_title2 | remove: '<p>'  | remove: '</p>' }}</h2>
+
+        <p>{{ section.settings.text_overlay2 }}</p> 
+
+        <a href="{{section.settings.shop_url}}" class="link-primary box__link">{{ section.settings.link_text }}</a>
+      </div><!-- /.box__content -->
+    </div><!-- /.box -->
+
+    <div class="box box--slider col--1of2">
+      <div class="box__image fullsize-image" ></div><!-- /.box__image fullsize-image -->
+
+      <div class="box__content">
+        <div class="slider">
+          <div class="slider__clip">
+            <div class="slider__slides">
+              {% for block in section.blocks %}
+                <div class="slider__slide">
+                  <div class="slider__slide-image fullsize-image" style="background-image: url({{ block.settings.slide_image | img_url: '720x' }});">
+<!--                      <img src="" alt="" width="720" height="849">  -->
+                  </div><!-- /.slider__slide-image -->
+                </div><!-- /.slider__slide -->
+              {% endfor %}
+            </div><!-- /.slider__slides -->
+          </div><!-- /.slider__clip -->
+        </div><!-- /.slider -->
+      </div><!-- /.box__content -->
+    </div><!-- /.box -->
+
+    <div class="box col box--last">
+      <div class="box__image fullsize-image" style="background-image: url({{ section.settings.image_3 | img_url:'2000x' }});"></div><!-- /.box__image fullsize-image -->
+    </div><!-- /.box -->
+  </div><!-- /.boxes -->
+</section><!-- /.section -->
+
+{% schema %}
+{
+    "name": "Home Promotions",
+	"class": "home-promotions--section",
+    "max_blocks": 5,
+    "settings": [
+    	{
+    		"type": "header",
+    		"content": "First Row"
+		},
+		{
+			"type": "image_picker",
+			"id": "hero_image",
+			"label": "Hero Image" 			
+		},
+		{
+			"type": "richtext",
+			"id": "sub_title1",
+			"label": "Title Overlay 1"
+		},
+		{
+			"type": "textarea",
+			"id": "text_overlay1",
+			"label": "Paragraph 1"
+		},
+		{
+    		"type": "header",
+    		"content": "Second Row"
+		},
+		{
+			"type": "richtext",
+			"id": "sub_title2",
+			"label": "Title Overlay 2"
+		},
+		{
+			"type": "textarea",
+			"id": "text_overlay2",
+			"label": "Text Overlay 2"
+		},
+		{
+			"type": "url",
+			"id": "shop_url",
+			"label": "Link Url"
+		},
+		{
+			"type": "text",
+			"id": "link_text",
+			"label": "Link Text"
+		},
+		{
+    		"type": "header",
+    		"content": "Third Row"
+		},
+		{
+			"type": "image_picker",
+			"id": "image_3",
+			"label": "Full Image" 			
+		}
+    ],
+    "blocks": [
+        {
+        "type": "slide_image",
+        "name": "Slide Image",
+        "settings": [
+            {
+                "label": "Slide Image",
+                "id": "slide_image",
+                "type": "image_picker"
+            }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Home Promotions",
+            "category": "Homepage",
+            "blocks": [
+                {
+                    "type": "slide_image"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,134 @@
+  
+
+{% if section.settings.show_related_products == true %}
+
+<hr>
+<div class="product-template__container" itemscope itemtype="http://schema.org/Product" id="ProductSection-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true">
+ 
+{% comment %}
+  Number of related items per row,
+  and number of rows.
+{% endcomment %}
+
+{% assign number_of_related_products_per_row = section.settings.related_grid_num %}
+{% assign number_of_rows = section.settings.related_grid_row %}
+
+{% comment %}
+  Heading.
+  Leave blank if you don't need one.
+{% endcomment %}
+
+{% assign heading = section.settings.related_title %}
+
+{% comment %}
+  Set either or both to true, if you want
+  to limit yourself to items with same vendor, and/or type.
+{% endcomment %}
+
+{% assign same_vendor = false %}
+{% assign same_type = false %}
+
+{% comment %}
+  Collections to ignore.
+  Never pick related items from those.
+{% endcomment %}
+
+{% assign exclusions = 'frontpage,all' | split: ',' %}
+
+{% comment %}
+  Looking for a relevant collection.
+{% endcomment %}
+
+{% if product.metafields.c_f['Related Products'] %}
+  {% assign collection = collections[product.metafields.c_f['Related Products']] %}
+{% endif %}
+
+{% assign found_a_collection = false %}
+{% if collection and collection.all_products_count > 1 %}
+  {% unless exclusions contains collection.handle %}
+    {% assign found_a_collection = true %}
+  {% endunless %}
+{% endif %}
+{% unless found_a_collection %}
+  {% for c in product.collections %}
+    {% unless exclusions contains c.handle or c.all_products_count < 2 %}
+      {% assign found_a_collection = true %}
+      {% assign collection = c %}
+      {% break %}
+    {% endunless %}
+  {% endfor %}
+{% endunless %}
+
+{% comment %}
+  If we have a relevant collection.
+{% endcomment %}
+
+{% if found_a_collection %}
+
+  {% assign current_product = product %}
+
+  <section class="section-primary section-primary--center">
+    <div class="section__head">
+      <div class="shell">
+        <h6>Seating</h6>
+
+        <h3 class="section__title">{{ heading }}</h3>
+      </div><!-- /.shell -->
+    </div><!-- /.section__head -->
+
+    <div class="section__body">
+      <div class="slider-animated">
+        <div class="slider__clip">
+          <div class="slider__slides widgets">
+            {% for product in collection.products %}
+            {% unless product.handle == current_product.handle %}
+            {% unless same_vendor and current_product.vendor != product.vendor %}
+            {% unless same_type and current_product.type != product.type %}
+            <div class="slider__slide">
+              <div class="widget first">
+                <div class="widget__image">
+                  <img src="{{ product.images[2] | product_img_url: 'master' }}" alt="" width="400" height="520">
+<!--                   <img src="{{ product.images.last | product_img_url: 'meidum' }}" alt="" width="400" height="520" class="widget__image--hover"> -->
+                </div><!-- /.widget__image -->
+
+                <div class="widget__content">
+                  <h5>
+                    <a href="{{ product.url | within: collection}}">{{ product.title }}</a>
+                  </h5>
+                </div><!-- /.widget__content -->
+              </div><!-- /.widget -->
+            </div><!-- /.slider__slide -->
+            {% endunless %}
+            {% endunless %}
+            {% endunless %}
+            {% endfor %}
+          </div><!-- /.slider__slides -->
+        </div><!-- /.slider__clip -->
+      </div><!-- /.slider -->
+    </div><!-- /.section__body -->
+  </section><!-- /.section-primary -->
+ 
+{% endif %}
+  
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Related products",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_related_products",
+      "label": "Show related products",
+      "default": false
+    },
+    {
+      "id": "related_title",
+      "type": "text",
+      "label": "Section title",
+      "default": "MORE TO EXPLORE"
+    }
+  ]
+}
+{% endschema %}

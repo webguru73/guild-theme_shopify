@@ -1,0 +1,91 @@
+<div class="faqstyle grid" style="">
+  <div class="faqstyle-left grid__item one-third">
+    <ul>
+      <li><a href="/pages/faqs-1">FAQ'S</a>
+      <li><a href="/pages/contact">CONTACT</a>
+      <li><a href="/pages/careers">CAREERS</a>
+      <li><a href="">ORDERING INFORMATION</a>
+      <li><a href="">SHIPPING INFORMATION</a>
+      <li><a href="">RETURNS &amp; EXCHANGES</a>
+      <li><a href="">QUALITY &amp; CARE</a>
+      <li><a href="">TERMS</a>
+    </ul>
+  </div>
+  
+  <div class="faqstyle-right grid__item two-thirds">
+
+    <div class="faqstyle-title">{{ page.title }}</div>
+
+    <div class="rte grid" style="margin-left: 0;">
+      <div class="grid__item two-thirds contact-left" style="padding-left:0;">
+        {{ page.content }}
+        <div class="form" style="margin-top: 50px;">
+            <form method="post" action="/contact#contact_form" id="contact_form" class="contact-form" accept-charset="UTF-8">
+              
+              <div class="form__row row">
+                <label for="contactFormName" class="form__label hidden">FIRST &amp; LAST NAME</label>
+                <div class="form__controls">
+                  <input type="text" class="field" id="contactFormName" name="contact[name]" placeholder="FIRST & LAST NAME">
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+              <div class="form__row row">
+                <label for="contactFormEmail" class="form__label hidden">Email</label>
+                <div class="form__controls">
+                  <input type="email" class="field" id="contactFormEmail" name="contact[email]" placeholder="EMAIL">
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+              
+              
+              
+              <div class="form__row row">
+                <div class="form__col form__col--1of2">
+                  <label for="contactFormTelephone" class="form__label hidden">PHONE</label>
+                  <div class="form__controls">
+                    <input type="telephone" class="field" id="contactFormTelephone" name="contact[phone]" placeholder="PHONE">
+                  </div><!-- /.form__controls -->
+                </div><!-- /.form__col form__col-/-1of2 -->
+                               
+                
+                <div class="form__col form__col--1of2">
+                  <label for="contactFormBestTime" class="form__label hidden">BEST TIME TO CALL</label>
+
+                  <div class="form__controls">
+                    <select style="appearance: menulist-button; -webkit-appearance:menulist-button;" class="field" id="contactFormBestTime" name="contact[best time to call]" placeholder="BEST TIME TO CALL"
+                            onFocus="javascript:nullOpt=document.getElementById('nullOpt');
+                                     (undefined != nullOpt) ?
+                                     document.getElementById('contactFormBestTime').removeChild(nullOpt) :
+                                     true;">
+                      <option id="nullOpt">BEST TIME TO CALL</option>
+                      <option value="0-8">00:00 - 08:00</option>
+                      <option value="8-16">08:00 - 16:00</option>
+                      <option value="16-24">16:00 - 24:00</option>
+                    </select>
+                    
+                  </div><!-- /.form__controls -->
+                </div><!-- /.form__col form__col-/-1of2 -->
+              </div><!-- /.form__row -->
+
+              <div class="form__row row" style="margin-top: 50px">
+                <label for="contactFormComments" class="form__label hidden">Email</label>
+                <div class="form__controls">
+                  <textarea class="field" id="contactFormComments" name="contact[body]" placeholder="COMMENTS"></textarea>
+                </div><!-- /.form__controls -->
+              </div><!-- /.form__row -->
+
+              <div class="form__actions">
+                <input type="submit" value="Submit" class="link-primary form__btn">
+              </div><!-- /.form__actions -->
+            </form>
+          </div>
+      </div>
+      <div class="grid__item one-third contact-right" style="">
+        <div class="sub-title2">guild</div>
+        <div class="guild-phone">(555) 555-5555</div>
+        <div class="sub-title2">la mercerie</div>
+        <div class="guild-phone">(555) 555-5555</div>
+        <div class="sub-title2">emily thompson flowers at the guild</div>
+        <div class="guild-phone">(555) 555-5555</div>
+      </div>
+    </div>
+  </div>
+</div>

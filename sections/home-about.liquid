@@ -1,0 +1,76 @@
+<div class="section section--black section--about">
+  <div class="shell shell--larger">
+    <div class="section__inner">
+      <aside class="section__aside">
+        <div class="card">
+          <img src="{{ section.settings.photo | img_url: '554x' }}" alt="" width="554" height="710">
+        </div><!-- /.card -->
+      </aside><!-- /.section__aside -->
+
+      <div class="section__content">
+        <h2>
+          {{ section.settings.top_headline | remove: '<p>' | remove: '</p>'}} 
+
+          <span class="visible-xs-block">{{ section.settings.bottom_text }}</span>
+        </h2>
+
+        <p>{{ section.settings.description }}</p>
+
+        <a href="{{ section.settings.readmore_url }}" class="link-primary section__link">{{ section.settings.readmore_link_text }}</a>
+
+        <h2 class="hidden-xs">
+          <span>{{ section.settings.bottom_text }}</span>
+        </h2>
+      </div><!-- /.section__content -->
+    </div><!-- /.section__inner -->
+  </div><!-- /.shell -->
+</div><!-- /.section -->
+{% schema %}
+  {
+    "name": "About Section",
+    "settings": [
+    	{
+    		"type": "image_picker",
+    		"id": "photo",
+    		"label": "Our Photo"
+    	},
+    	{
+    		"type": "richtext",
+    		"id": "top_headline",
+    		"label": "Header Text"
+    	},
+    	{
+    		"type": "textarea",
+    		"id": "description",
+    		"label": "Description"
+    	},
+    	{
+    		"type": "text",
+    		"id": "readmore_link_text",
+    		"label": "Read More Link Text"
+    	},
+    	{
+    		"type": "text",
+    		"id": "readmore_url",
+    		"label": "Read More Url"
+    	},
+    	{
+    		"type": "text",
+    		"id": "bottom_text",
+    		"label": "Bottom Text"
+    	}
+    ],
+    "presets": [
+        {
+            "name": "Home About",
+            "category": "Homepage"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

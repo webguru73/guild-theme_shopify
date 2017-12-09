@@ -1,0 +1,169 @@
+{% paginate collection.products by 12 %}
+<div class="section-category ">
+
+  <div class="section__intro">
+    <img src="{{ collection.image | img_url:'master' }}" alt="" class="section__intro-image">
+  </div><!-- /.section__intro -->
+  
+  <div class="section__content">
+    <div class="shell shell--larger">
+      
+      {% include "breadcrumbs" %}
+
+      <div class="section__entry">
+        <div class="section__entry-title">
+          <h1>{{ collection.title | upcase }}</h1>
+        </div><!-- /.section__entry-title -->
+        {% if section.settings.enable_description %}
+          <div class="section__entry-content">
+            <p>{{ collection.description | upcase }}</p>
+          </div>
+        {% endif %}
+      </div><!-- /.section__entry -->
+      
+      {% include "collection-filters" %}
+      
+    </div><!-- /.shell shell-/-larger -->
+  </div><!-- /.section__content -->
+
+  <div class="section__list widgets">
+    {% for product in collection.products %}
+    <div class="widget">
+      <a href="{{ product.url | within: 'collection' }}">
+        <div class="widget__image">
+          <img src="{{ product.featured_image | img_url:'master' }}" alt="">
+
+          <span>ON VIEW IN STORE</span>
+        </div><!-- /.widget__image -->
+
+        <div class="widget__content">
+          <h5>
+            {{ product.title | upcase }}
+          </h5>
+        </div><!-- /.widget__content -->
+      </a>
+    </div><!-- /.widget -->
+    {% endfor %}
+   </div><!-- /.section__list -->
+</div><!-- /.section-category section-category-/-no-intro -->
+
+  {% if paginate.pages > 1 %}
+  	{% include 'pagination' %}
+  {% endif %}
+{% endpaginate %}
+
+{% comment %}
+  <header role="banner">
+    <h1>{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="rte">
+        {{ collection.description }}
+      </div>
+    {% endif %}
+
+    {% if collection.all_tags.size > 0 %}
+      <ul>
+        {% for tag in collection.all_tags %}
+          {% if current_tags contains tag %}
+            <li class="active">
+              {{ tag | link_to_remove_tag: tag }}
+            </li>
+          {% else %}
+            <li>
+              {{ tag | link_to_tag: tag }}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </header>
+
+  <div>
+    {% for product in collection.products %}
+      <div>
+        {% if product.featured_image != blank %}
+          <a href="{{ product.url | within: collection }}">
+            {{ product.featured_image.src | img_url: '480x480' | img_tag: product.featured_image.alt }}
+          </a>
+        {% endif %}
+
+        <p>
+          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        </p>
+        <p>
+          {% if product.compare_at_price > product.price %}
+
+            {% if product.price_varies %}
+              {%- assign sale_price = product.price | money -%}
+              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+            {% else %}
+              {{ 'products.product.on_sale' | t }}
+              {{ product.price | money }}
+            {% endif %}
+
+          {% else %}
+
+            {% if product.price_varies %}
+              {%- assign price = product.price | money -%}
+              {{ 'products.product.from_text_html' | t: price: price }}
+            {% else %}
+              {{ product.price | money }}
+            {% endif %}
+
+          {% endif %}
+
+          {% if product.compare_at_price > product.price %}
+            <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+            <s>{{ product.compare_at_price | money }}</s>
+          {% endif %}
+
+          {% unless product.available %}
+            {{ 'products.product.sold_out' | t }}
+          {% endunless %}
+        </p>
+      </div>
+
+    {% else %}
+      {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+        {% for i in (1..8) %}
+          <a href="#">
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+          </a>
+
+          <p>
+            <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
+          </p>
+
+          <p>
+            {{ 1999 | money }}
+          </p>
+        {% endfor %}
+      {% else %}
+        <p>{{ 'collections.general.no_matches' | t }}</p>
+      {% endif %}
+
+    {% endfor %}
+  </div>
+
+{% endcomment %}
+
+{% schema %}
+  {
+    "name": "Collection",
+	"class": "collection-template",
+    "settings": [
+		{
+			"type": "checkbox",
+			"id": "enable_description",
+			"label": "Show Description"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

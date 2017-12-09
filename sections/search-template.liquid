@@ -1,0 +1,108 @@
+<div class="section-search">
+{% paginate search.results by 50 %}
+  <div class="form-search">
+    <form action="/search" method="get" role="search">
+      <div class="form__head">
+        <div class="form__row">
+          <label for="search-product" class="form__label hidden">{{ 'general.search.placeholder' | t }}</label>
+
+          <div class="form__controls">
+            <input type="search"
+                   name="q"
+                   id="search-product"
+                   class="field field--search"
+                   value="{{ search.terms | escape }}"
+                   placeholder="{{ 'general.search.placeholder' | t }}">
+          </div><!-- /.form__controls -->
+        </div><!-- /.form__row -->
+      </div><!-- /.form__head -->
+    </form>
+  </div>
+	{% include "collection-filters" %}
+
+  {% if search.performed %}
+    <div class="section__results widgets">
+      {% for item in search.results %}
+      	{% assign featured_image = item.image | default: item.featured_image %}
+      	<div class="widget">
+          {% if featured_image != blank %}
+            <div class="widget__image">
+              <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                {{ featured_image | img_url: '240x240' | img_tag: featured_image.alt }}
+              </a>
+            </div><!-- /.widget__image -->
+          {% endif %}
+          <div class="widget__content">
+            <h5>
+              <a href="{{ item.url }}">{{ item.title }}</a>
+            </h5>
+          </div><!-- /.widget__content -->
+        </div><!-- /.widget -->
+      {% endfor %}
+    </div>
+  
+    {% if paginate.pages > 1 %}
+    	{% include 'pagination' %}
+    {% endif %}
+  {% endif %}
+  
+  {% comment %}
+{% if search.performed %}
+    <ul>
+      {% for item in search.results %}
+        <li>
+          {% assign featured_image = item.image | default: item.featured_image %}
+          {% if featured_image != blank %}
+            <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+              {{ featured_image | img_url: '240x240' | img_tag: featured_image.alt }}
+            </a>
+          {% endif %}
+
+          <h5>{{ item.title | link_to: item.url }}</h5>
+
+          {% if item.object_type == 'product' %}
+            <p>
+              {% if item.compare_at_price > item.price %}
+                {% if item.price_varies %}
+                  {% assign sale_price = item.price | money %}
+                  {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                {% else %}
+                  {{ 'products.product.on_sale' | t }}
+                  <span itemprop="price">{{ item.price | money }}</span>
+                {% endif %}
+                <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                <s>{{ item.compare_at_price | money }}</s>
+              {% else %}
+                {% if item.price_varies %}
+                  {% assign price = item.price | money %}
+                  <span itemprop="price">{{ 'products.product.from_text_html' | t: price: price }}</span>
+                {% else %}
+                  <span itemprop="price">{{ item.price | money }}</span>
+                {% endif %}
+              {% endif %}
+              {% unless item.available %}
+              {{ 'products.product.sold_out' | t }}
+              {% endunless %}
+            </p>
+          {% else %}
+            <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+          {% endif %}
+
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endcomment %}
+  
+{% endpaginate %}
+</div>
+  
+{% schema %}
+  {
+    "name": "Search",
+	"class": "search-template",
+    "settings": [
+	]
+  }
+{% endschema %}
+

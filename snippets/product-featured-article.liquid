@@ -1,0 +1,24 @@
+{% comment %}
+{% for block in section.blocks %}
+  {% if block.type == "article" %}
+	{% if block.settings.content_article != blank %}
+	{% assign featured_article = articles[block.settings.content_article] %}
+    <article class="article-secondary">
+      <div class="article__content">
+        <h2>
+          {{ featured_article.title }}
+        </h2>
+
+        <p>{{ featured_article.content }}</p>
+
+        <a href="{{ featured_article.url }}" class="link-primary link-primary--alt">Full Story</a>
+      </div><!-- /.article__content -->
+
+      <figure class="figure article__image">
+        <img src="{{ featured_article.image.src | img_url: 'master' }}" alt="">
+      </figure><!-- /.figure article__image -->
+    </article><!-- /.article-secondary -->
+	{% endif %}
+  {% endif %}
+{% endfor %}
+{% endcomment %}

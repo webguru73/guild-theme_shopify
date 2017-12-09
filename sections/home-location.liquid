@@ -1,0 +1,65 @@
+<section class="section section--location section--black">
+  <div class="shell shell--larger">
+    <div class="section__inner">
+      <div class="section__aside">
+        <div class="card">
+          <img src="{{ section.settings.map | img_url: "800x"}}" alt="">
+        </div><!-- /.card -->
+      </div><!-- /.section__aside -->
+
+      <div class="section__content">
+        <h6>{{ section.settings.small_headline }}</h6>
+
+        <address>
+          <img src="{{ 'address.svg' | asset_url }}">
+        </address>
+
+        <a href="{{ section.settings.link_url }}" class="link-primary section__link">{{ section.settings.link_text }}</a>
+      </div><!-- /.section__content -->
+    </div><!-- /.section__inner -->
+  </div><!-- /.shell -->
+</section><!-- /.section section-/-location-->
+
+{% schema %}
+  {
+    "name": "Our Location",
+    "settings": [
+    	{
+    		"type": "image_picker",
+    		"id": "map",
+    		"label": "Map"
+    	},
+    	{
+    		"type": "text",
+    		"id": "small_headline",
+    		"label": "Small Headline"
+    	},
+    	{
+    		"type": "header",
+    		"content" : "Address"
+    	},
+    	{
+    		"type": "text",
+    		"id": "link_text",
+    		"label": "Link Text"
+    	},
+    	{
+    		"type": "text",
+    		"id": "link_url",
+    		"label": "Link Url"
+    	}
+    ],
+    "presets": [
+        {
+            "name": "Our Location",
+            "category": "Homepage"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,136 @@
+
+<section class="section">
+  <div class="boxes row">
+    <div class="box col">
+      <div class="box__image fullsize-image" style="background-image: url({{ section.settings.hero_image | img_url: 'master' }});"></div><!-- /.box__image fullsize-image -->
+
+      <div class="box__content center_box__hero__content box__hero_content">
+
+
+        <h2>{{ section.settings.sub_title1 | remove: '<p>'  | remove: '</p>' }}</h2>
+
+        <span>{{ section.settings.text_overlay1 }}</span>
+                
+      </div><!-- /.box__content -->
+    </div>
+    
+  </div>
+  <div class="boxes row masonry">
+  {% for block in section.blocks %}
+    
+    <div class="masonry-item">
+      <img src="{{ block.settings.image | img_url: 'master' }}"/>
+      
+        
+      <p class="press_date">{{block.settings.date}}</p>
+      <p class="press_title">{{block.settings.title}}</p>
+      <p class="press_summary">{{block.settings.summary}}</p>
+      <p class="press_author">{{block.settings.author}}</p>
+      <a href="{{block.settings.link}}" class="press_link_title">{{block.settings.link_title}}</a>
+        
+    </div>
+  {% endfor %}
+  </div>
+  
+  <div style="text-align:center; margin-bottom:100px;"><a href="#">ARCHIVE</a></div>
+</section>
+
+{% schema %}
+{
+    "name": "Press Promotions",
+	"class": "press-promotions--section",
+    "max_blocks": 10,
+    "settings": [
+		{
+			"type": "image_picker",
+			"id": "hero_image",
+			"label": "Hero Image" 			
+		},
+  		{
+			"type": "richtext",
+			"id": "sub_title1",
+			"label": "Title Overlay 1"
+		},
+		{
+			"type": "textarea",
+			"id": "text_overlay1",
+			"label": "Paragraph 1"
+		}
+    ],
+    "blocks": [
+        {
+        "type": "press",
+        "name": "Press",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Press Image"
+            },
+			{
+                "type": "text",
+                "id": "date",
+                "label": "Name and Date"
+            },
+			{
+                "type": "textarea",
+                "id": "title",
+                "label": "Press Title"
+            },
+			{
+                "type": "textarea",
+                "id": "summary",
+                "label": "Summary"
+            },
+			{
+                "type": "text",
+                "id": "author",
+                "label": "Author"
+            },
+			{
+                "type": "text",
+                "id": "link_title",
+                "label": "Link Title"
+            },
+			{
+                "type": "text",
+                "id": "link",
+                "label": "Link"
+            }
+        ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Press Promotions",
+            "category": "VisitPage",
+            "blocks": [
+                {
+                    "type": "press"
+                },
+				{
+                    "type": "press"
+                },
+				{
+                    "type": "press"
+                },
+				{
+                    "type": "press"
+                },
+				{
+                    "type": "press"
+                },
+				{
+                    "type": "press"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

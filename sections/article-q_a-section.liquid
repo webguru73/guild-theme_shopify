@@ -1,0 +1,231 @@
+<article class="article-section" role="article" itemscope itemtype="http://schema.org/Article">
+  <div class="hero__image">
+    {% if article.image %}
+    	{{ article | img_url: '1024x1024' | img_tag: article.title }}
+    {% endif %}
+  </div>
+  
+  <div class="article__body">
+    <div class="article__inner">
+      {% capture date %}{{ article.published_at | time_tag: format: 'date_month_year' }}{% endcapture %}
+      <p class="article__date"> <a href="{{ blog.url }}">{{ blog.title | upcase}}</a> - {{ date | upcase}} - 9:46 AM</p>
+      <h2 class="article__title">{{ article.title }}</h2>
+      <p>Interview By  <span class="author__name">{{ article.author | upcase}}</span></p>
+      <p>Commentary By  <span class="author__name">{{ article.author | upcase}}</span></p>
+    </div><!-- /.article__inner -->
+    
+    <div class="article__content">
+      <div class="shell">
+        <div class="short_intro">
+          <h4>{{ article.excerpt }}</h4>
+        </div>
+        <p>{{ article.content | split:"~section 1~" | first }}</p>
+      </div>
+      <div class="section--secondary">
+        <div class="section__inner">
+          <div class="section__content box--slider">
+            <div class="slider">
+              <div class="slider__clip">
+                <div class="slider__slides">
+                  {% assign article_slides = article.content | split:"~Description~" | last | split: "~Image Slides~" | first %}
+                  {% assign article_slide = article_slides | split: "~Slide~" %}
+                  {% assign slide_length = article_slide.size | minus: 1 %}
+                  {% for i in (0..slide_length) %}
+                  <div class="slider__slide">
+                    <div class="slider__slide-image ratio aspect-1_1" >
+                      {{ article_slide[i] }}
+                    </div><!-- /.slider__slide-image -->
+                  </div><!-- /.slider__slide -->
+                  {% endfor %}
+                </div><!-- /.slider__slides -->
+              </div><!-- /.slider__clip -->
+            </div><!-- /.slider -->
+          </div><!-- /.box -->
+          <div class="section__aside">
+            <p>{{ article.content | split:"~section 1~" | last | split: "~section 2~" | first}}</p>
+          </div><!-- /.box__content -->
+        </div>
+      </div>
+      <div class="shell">
+        {{ article.content | split:"~section 2~" | last | split: "~section 3~" | first}}
+      </div>
+      
+      <div class="article__photos">
+        <div class=" col--1of2">
+          <div class=" ratio aspect-1_1" >{{ article.content| split: "~Image Slides~" | last  | split: "~Left Photo~" | first }}</div>
+          
+        </div><!-- /.box -->
+        <div class=" col--1of2">
+          <div class=" ratio aspect-5_4" >{{ article.content | split: "~Left Photo~" | last }}</div>
+          
+        </div><!-- /.box -->
+      </div><!-- /.boxes -->
+      
+      <div class="shell">
+        {{ article.content | split:"~section 3~" | last | split: "~section 4~" | first}}
+      </div>
+      
+      <h2 class="article__quote">{{ article.content | split:"~section 4~" | last | split: "~section 5~" | first }}</h2>
+      
+      <div class="shell">
+        {{ article.content | split:"~section 5~" | last | split: "~Description~" | first}}
+      </div>
+      
+    </div><!-- /.article__content -->
+    
+    <div class="related__articles articles shell--large" style="display: flex">
+      
+      <h3>More Stories</h3>
+      
+      {% assign currentHandle = article.handle %}
+      {% assign articlesFound = 0 %}
+      {% for addin in blogs[blog.handle].articles limit:3 %}
+      	{% unless addin.handle == currentHandle %}
+          <div class="article row col--1of2">
+            <div class="article__image ratio {% if forloop.last %} aspect-5_4{% else %} aspect-1_1{% endif%}">
+              <a href="#">
+                {{ addin | img_url:'500x' | img_tag}}
+              </a>
+            </div><!-- /.article__image -->
+
+            <div class="article__info">
+              <h5 class="article__meta">
+                <a href="{{ blog.url }}">{{ blog.title }}</a>
+              </h5>
+
+              <h2>
+                <a href="{{ addin.url }}">{{ addin.title }}</a>
+              </h2>
+              <h3>
+                {{ addin.excerpt }}
+              </h3>
+                  
+            </div><!-- /.article__content -->
+          </div><!-- /.box -->
+          {% assign articlesFound = articlesFound |plus: 1 %}
+          {% if articlesFound == 2 %}{% break %}{% endif %}
+      	{% endunless %}
+      {% endfor %}
+    </div><!-- /.related__articles -->
+  </div><!-- /.article__body -->
+
+  {% if blog.comments_enabled? %}
+    <h3>{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h3>
+
+    {% paginate article.comments by 5 %}
+
+    <div id="comments">
+      {% if comment and comment.status and paginate.current_page == 1 %}
+        <p class="form-success">
+          {% if blog.moderated? and comment.status != 'published' %}
+            {{ 'blogs.comments.success_moderated' | t }}
+          {% else %}
+            {{ 'blogs.comments.success' | t }}
+          {% endif %}
+        </p>
+      {% endif %}
+
+      {% if number_of_comments > 0 %}
+        <ul>
+          {% comment %}
+            Display comment from URL parameters if it is waiting moderation
+          {% endcomment %}
+          {% if comment and comment.status != 'published' %}
+            <li id="{{ comment.id }}">
+              <div class="rte">
+                {{ comment.content }}
+              </div>
+              {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+              <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
+            </li>
+          {% endif %}
+
+          {% for comment in article.comments %}
+            <li id="{{ comment.id }}">
+              <div class="rte">
+                {{ comment.content }}
+              </div>
+              {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+              <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
+            </li>
+
+          {% endfor %}
+        </ul>
+
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+      {% endif %}
+    </div>
+
+    {% endpaginate %}
+
+    {% form 'new_comment', article %}
+      <h3>{{ 'blogs.comments.title' | t }}</h3>
+
+      {{ form.errors | default_errors }}
+
+      <label for="CommentAuthor" class="label-hidden">
+        {{ 'blogs.comments.name' | t }}
+      </label>
+      <input type="text"
+             name="comment[author]"
+             id="CommentAuthor"
+             class="{% if form.errors contains 'author' %}input-error{% endif %}"
+             placeholder="{{ 'blogs.comments.name' | t }}"
+             value="{{ form.author }}"
+             autocapitalize="words">
+
+      <label for="CommentEmail" class="label-hidden">
+        {{ 'blogs.comments.email' | t }}
+      </label>
+      <input type="email"
+             name="comment[email]"
+             id="CommentEmail"
+             class="{% if form.errors contains 'email' %}input-error{% endif %}"
+             placeholder="{{ 'blogs.comments.email' | t }}"
+             value="{{ form.email }}"
+             spellcheck="false"
+             autocomplete="off"
+             autocapitalize="off">
+
+      <label for="CommentBody" class="label-hidden">
+        {{ 'blogs.comments.message' | t }}
+      </label>
+      <textarea
+        name="comment[body]"
+        id="CommentBody"
+        class="{% if form.errors contains 'body' %}input-error{% endif %}"
+        placeholder="{{ 'blogs.comments.message' | t }}">
+        {{ form.body }}
+      </textarea>
+
+      {% if blog.moderated? %}
+        <p>{{ 'blogs.comments.moderated' | t }}</p>
+      {% endif %}
+
+      <input type="submit" class="btn" value="{{ 'blogs.comments.post' | t }}">
+    {% endform %}
+
+  {% endif %}
+
+</article>
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": [
+		{
+			"type":"text",
+			"id": "commentor",
+			"label": "Commentary By"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

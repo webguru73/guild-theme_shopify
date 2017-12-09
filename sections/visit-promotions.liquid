@@ -1,0 +1,137 @@
+
+<section class="section">
+  <div class="boxes row">
+    <div class="box col">
+      <div class="box__image fullsize-image box--black"></div><!-- /.box__image fullsize-image -->
+
+      <div class="box__content center_box__hero__content box__hero_content">
+
+
+        <h2>{{ section.settings.sub_title1 | remove: '<p>'  | remove: '</p>' }}</h2>
+
+        <span>{{ section.settings.text_overlay1 }}</span>
+        
+        <h4 style="margin-top: 100px; font-weight: normal; font-family:Apercu; font-size: 12px; letter-spacing: 2px;">ADDRESS</h4>
+        <div class="address">{{section.settings.sub_title2}}</div>
+        
+        <a href="#">GET DIRECTIONS</a>
+        
+      </div><!-- /.box__content -->
+    </div>
+    
+  </div>
+  {% for block in section.blocks %}
+  <div class="boxes row">
+    
+    <div class="box box--center col--1of2">
+      <div class="box__content guild__content">
+		<img src="{{ block.settings.image | img_url: 'master' }}"/>
+      </div>
+    </div>
+    <div class="box box--center col--1of2">
+      <div class="box__content guild__content">
+        <div class="guild_name">{{block.settings.name}}</div>
+        <div class="guild_description">{{block.settings.description}}</div>
+        
+        <p class="sub_title">PHONE</p>
+        <p class="sub_content">{{block.settings.phone}}</p>
+        <p class="sub_title">MONDAY - FRIDAY</p>
+        <p class="sub_content">{{block.settings.workday_time}}</p>
+        <p class="sub_title">SATURDAY &amp; SUNDAY</p>
+        <p class="sub_content">{{block.settings.weekend_time}}</p>
+        
+        {% if forloop.index == 2 %}
+        	<a href="#" style="margin-top: 25px;display: inline-block;">BREAKFAST MENU</a><br>
+        	<a href="#" style="margin-top: 10px">ALL DAY MENU</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+    "name": "Visit Promotions",
+	"class": "visit-promotions--section",
+    "max_blocks": 5,
+    "settings": [
+		{
+			"type": "richtext",
+			"id": "sub_title1",
+			"label": "Title Overlay 1"
+		},
+		{
+			"type": "textarea",
+			"id": "text_overlay1",
+			"label": "Paragraph 1"
+		},
+		{
+			"type": "richtext",
+			"id": "sub_title2",
+			"label": "Address"
+		}
+    ],
+    "blocks": [
+        {
+        "type": "guild",
+        "name": "Guild",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Guild Image"
+            },
+			{
+                "type": "text",
+                "id": "name",
+                "label": "Guild Name"
+            },
+			{
+                "type": "textarea",
+                "id": "description",
+                "label": "Description"
+            },
+			{
+                "type": "text",
+                "id": "phone",
+                "label": "Phone"
+            },
+			{
+                "type": "text",
+                "id": "workday_time",
+                "label": "MONDAY - FRIDAY"
+            },
+			{
+                "type": "text",
+                "id": "weekend_time",
+                "label": "SATURDAY and SUNDAY"
+            }
+        ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Visit Promotions",
+            "category": "VisitPage",
+            "blocks": [
+                {
+                    "type": "guild"
+                },
+				{
+                    "type": "guild"
+                },
+				{
+                    "type": "guild"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,429 @@
+{
+  "current": {
+    "type_base_size": "16px",
+    "color_primary": "#000",
+    "color_body_text": "#000",
+    "social_sharing_blog": true,
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "social_twitter_link": "",
+    "social_facebook_link": "",
+    "social_pinterest_link": "",
+    "social_instagram_link": "",
+    "social_snapchat_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "cart_notes_enable": true,
+    "favicon": "",
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/guild_bottom.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "large",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Oswald",
+    "checkout_body_font": "Lato",
+    "checkout_accent_color": "#1990c6",
+    "checkout_button_color": "#1990c6",
+    "checkout_error_color": "#ff6d6d",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/logo_2x_ff553d51-f0a1-40d4-ac57-453a3d6ef9a8.png",
+          "mobile_logo": "shopify:\/\/shop_images\/logo-mobile_2x_737643de-ec5e-4349-8c08-1309eed34f25.png",
+          "logo_max_width": 450,
+          "main_left_linklist": "main-menu",
+          "main_right_linklist": "right-main-menu",
+          "visit_page_1": "the-gulid",
+          "visit_page_1_img": "shopify:\/\/shop_images\/8063152_maison-de-verre-paris-by-pierre-chareau_t9c0e69a2.jpg",
+          "visit_page_2": "la-mercerie-at-the-guild",
+          "visit_page_2_img": "shopify:\/\/shop_images\/705022efa8a2d7339b87d43f5e8d59ef.jpg",
+          "visit_page_3": "emily-thompson-flowers-at-the-guild",
+          "visit_page_3_img": "shopify:\/\/shop_images\/DSC_0168.jpg",
+          "explore_page_1_link": "https:\/\/romanandwilliams.com",
+          "explore_page_1": "Roman And Williams",
+          "explore_page_1_img": "shopify:\/\/shop_images\/arar_roman_williams_01_h.jpg",
+          "explore_page_2": "about-the-guild",
+          "explore_page_2_img": "shopify:\/\/shop_images\/Screen_Shot_2017-08-08_at_12.42.02_PM.png",
+          "explore_page_3": "the-eye",
+          "explore_page_3_img": "shopify:\/\/shop_images\/Screen_Shot_2017-06-29_at_11.59.11_AM.png"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "subscribe_header": "WE'D LOVE TO KEEP  IN TOUCH",
+          "footer_linklist_1": "footer",
+          "footer_linklist_2": "secondary-footer-menu",
+          "footer_logo_1": "shopify:\/\/shop_images\/guild_bottom.png",
+          "footer_logo_1_link": "#",
+          "footer_logo_2": "shopify:\/\/shop_images\/la_mercerie.png",
+          "footer_logo_2_link": "#",
+          "footer_logo_3": "shopify:\/\/shop_images\/emily_thompson.png",
+          "footer_logo_3_link": "#",
+          "street": "FIFTY-THREE HOWARD ST.",
+          "city": "NEW YORK, NY",
+          "phone_num": "(555) 555-5555",
+          "shop_logo": "shopify:\/\/shop_images\/bottom_insignia.png",
+          "copyright_text": "GUILD NY 2017, ALL RIGHTS RESERVED"
+        }
+      },
+      "1510668308194": {
+        "type": "home-promotions",
+        "blocks": {
+          "1510671741666": {
+            "type": "slide_image",
+            "settings": {
+              "slide_image": "shopify:\/\/shop_images\/BC1.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "1510671741666"
+        ],
+        "settings": {
+          "hero_image": "shopify:\/\/shop_images\/home1.jpg",
+          "sub_title1": "<p>MODERN DAY GUILD<\/p>",
+          "text_overlay1": "We, Roman and Williams, are establishing a guild of the senses, that gathers the best of everything we make, and everything we love, and helps others do the same for themselves.",
+          "sub_title2": "<p><strong>lets<\/strong><br>PARTY<\/p>",
+          "text_overlay2": "THE BACHELOR  is an all American bottle ballerino, dancing between the flight of mid-century mod and the solid earth of craft. How can something so classy and good also be so grounded and real?",
+          "shop_url": "shopify:\/\/products\/the-bachelor-bar-cart",
+          "link_text": "SHOP THE BACHELOR",
+          "image_3": "shopify:\/\/shop_images\/COMMUNITY_HERO_glass_mix_02403_0b65f468-f5b7-49bd-a9da-f7e3ddcb9a9f.jpg"
+        }
+      },
+      "1510674680540": {
+        "type": "featured-collection",
+        "settings": {
+          "small_title": "CURATED",
+          "main_title": "FOUNDING",
+          "show_description": true,
+          "link_text": "SHOP THE COLLECTION",
+          "collection": "founding"
+        }
+      },
+      "1510751524963": {
+        "type": "featured-collection",
+        "disabled": true,
+        "settings": {
+          "small_title": "CURATED",
+          "main_title": "Montauk 2",
+          "show_description": true,
+          "link_text": "Discover the room",
+          "collection": "frontpage"
+        }
+      },
+      "1510751532244": {
+        "type": "featured-collection",
+        "disabled": true,
+        "settings": {
+          "small_title": "CURATED",
+          "main_title": "Montauk 3",
+          "show_description": false,
+          "link_text": "Discover the room",
+          "collection": "frontpage"
+        }
+      },
+      "1510754234884": {
+        "type": "home-special",
+        "settings": {
+          "shop_1_background": "shopify:\/\/shop_images\/food.jpg",
+          "shop_1_logo": "shopify:\/\/shop_images\/la_mercerie_white.png",
+          "shop_1_mobile_logo": "shopify:\/\/shop_images\/la_mercrie_white_mobile.png",
+          "shop_1_description": "<p>Serving breakfast, an all-day menu, cocktails, and coffee and tea. La Mercerie celebrates the thoughtful delight of everyday French cooking.<\/p>",
+          "shop_1_link_text": "VISIT THE CAFÉ",
+          "shop_1_url": "http:\/\/www.starr-restaurant.com\/",
+          "shop_2_background": "shopify:\/\/shop_images\/flowers_388ca4de-8b20-48ed-ba8a-31f7e81fd536.jpg",
+          "shop_2_logo": "shopify:\/\/shop_images\/emily_thompson_white.png",
+          "shop_2_mobile_logo": "shopify:\/\/shop_images\/emily_thompson_white_mobile.png",
+          "shop_2_description": "<p>Wild moments, precious and fleeting. Emily Thompson&rsquo;s Flowers lash and excite, drawing rampant sculptural nature into homes and thoughts.<\/p>",
+          "shop_2_link_text": "VISIT THE FLOWER SHOP",
+          "shop_2_url": "http:\/\/emilythompsonflowers.com\/",
+          "blog_background": "shopify:\/\/shop_images\/box5.jpg",
+          "blog_small_header": "Stories",
+          "blog_logo": "shopify:\/\/shop_images\/eye_2x_963d0d63-7d64-405e-8bf6-9324162dae36.png",
+          "blog_link_text": "Read + Shop",
+          "blog_url": "shopify:\/\/blogs\/the-eye",
+          "blog_widget_select": "the-eye",
+          "bottom_left_image": "shopify:\/\/shop_images\/box6.jpg",
+          "bottom_right_image": "shopify:\/\/shop_images\/box7.jpg"
+        }
+      },
+      "1510762946804": {
+        "type": "home-about",
+        "settings": {
+          "photo": "shopify:\/\/shop_images\/rw.jpg",
+          "top_headline": "<p>HOW&nbsp;<em>it<\/em><\/p>",
+          "description": "We’ve always felt as though the world we saw around us could be warmer, and more carefully made. The legacy of the Modernist design movement, which we grew up in, was often so cold and alienating. So, we’ve dedicated ourselves to building the world we want to live in.",
+          "readmore_link_text": "Read More",
+          "readmore_url": "https:\/\/rwguild.myshopify.com\/pages\/about-the-guild",
+          "bottom_text": "BEGAN"
+        }
+      },
+      "home-location": {
+        "type": "home-location",
+        "settings": {
+          "map": "shopify:\/\/shop_images\/guild_map.png",
+          "small_headline": "SEE IT IN PERSON",
+          "link_text": "VISIT US",
+          "link_url": ""
+        }
+      },
+      "product-custom_pieces": {
+        "type": "product-custom_pieces",
+        "blocks": {
+          "1511548701978": {
+            "type": "article",
+            "settings": {
+              "content_article": "news\/the-teapot"
+            }
+          }
+        },
+        "block_order": [
+          "1511548701978"
+        ],
+        "settings": {}
+      },
+      "product-community": {
+        "type": "product-community",
+        "settings": {}
+      },
+      "related-products": {
+        "type": "related-products",
+        "settings": {
+          "show_related_products": true,
+          "related_title": "MORE TO EXPLORE"
+        }
+      },
+      "product-non_custom_pieces": {
+        "type": "product-non_custom_pieces",
+        "blocks": {
+          "1511550113245": {
+            "type": "article",
+            "settings": {
+              "content_article": ""
+            }
+          }
+        },
+        "block_order": [
+          "1511550113245"
+        ],
+        "settings": {}
+      },
+      "product": {
+        "type": "product",
+        "settings": {
+          "show_share_buttons": true
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "enable_description": true
+        }
+      },
+      "article-q_a-section": {
+        "type": "article-q_a-section",
+        "settings": {
+          "commentor": "asdf"
+        }
+      },
+      "visit-promotions": {
+        "type": "visit-promotions",
+        "blocks": {
+          "1512704085654": {
+            "type": "guild",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/tgil.jpg",
+              "name": "RW GUILD",
+              "description": "INT LATIBUS. OS ET MOLESTI DEL ET OD QUI BLACCUS DANDIO TO ET DOLO ENIMAGNATUSA SENDIPIC TOR A DIS SIT, OMNIS REM QUOSTIS ET UT UT UT AM, ASI SIT",
+              "phone": "(555) 555-5555",
+              "workday_time": "8AM - 11PM",
+              "weekend_time": "10AM - 1AM"
+            }
+          },
+          "1512704118302": {
+            "type": "guild",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/merc.jpg",
+              "name": "LA MERCERIE",
+              "description": "SERVING BREAKFAST, AN ALL-DAY MENU, COCKTAILS, AND COFFEE AND TEA. LA MERCERIE CELEBRATES THE THOUGHTFUL DELIGHT OF EVERYDAY FRENCH COOKING.",
+              "phone": "(555) 555-5555",
+              "workday_time": "8AM - 11PM",
+              "weekend_time": "10AM - 1AM"
+            }
+          },
+          "1512704154854": {
+            "type": "guild",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/eflow.jpg",
+              "name": "EMILY THOMPSON FLOWERS",
+              "description": "SERVING BREAKFAST, AN ALL-DAY MENU, COCKTAILS, AND COFFEE AND TEA. LA MERCERIE CELEBRATES THE THOUGHTFUL DELIGHT OF EVERYDAY FRENCH COOKING.",
+              "phone": "(555) 555-5555",
+              "workday_time": "8AM - 11PM",
+              "weekend_time": "10AM - 1AM"
+            }
+          }
+        },
+        "block_order": [
+          "1512704085654",
+          "1512704118302",
+          "1512704154854"
+        ],
+        "settings": {
+          "sub_title1": "<p><em>VISIT<\/em> US&nbsp;<\/p>",
+          "text_overlay1": "Git omnimus aliquiaes quat porerio nsequiam qui c optae verfero blameni dolupta spiendi core",
+          "sub_title2": "<p>53 HOWARD ST<br> NEW YORK, NY<\/p>"
+        }
+      },
+      "press-promotions": {
+        "type": "press-promotions",
+        "blocks": {
+          "1512714281843": {
+            "type": "press",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/press1.png",
+              "date": "ESQUIRE – DECEMBER 2017",
+              "title": "DESIGN THE HOMEFRONT",
+              "summary": "With its first store, the world-class design firm Roman and Williams is putting  in a bid to remake your place.",
+              "author": "",
+              "link_title": "SHOP THE READER",
+              "link": "#"
+            }
+          },
+          "1512714538770": {
+            "type": "press",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/press3.png",
+              "date": "INSTYLE – DECEMBER 2017",
+              "title": "2017 HOLIDAY GIFT GUIDE: TEAPOT",
+              "summary": "",
+              "author": "",
+              "link_title": "SHOP THE TEAPOT",
+              "link": "#"
+            }
+          },
+          "1512714612836": {
+            "type": "press",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/press5.png",
+              "date": "NEW YORK MAGAZINE – NOVEMBER 2017",
+              "title": "BEST BETS",
+              "summary": "In December, Ace Hotel Design firm Roman and Williams will open its first store, with a florist, an art supply room, and a shoppable libraray.",
+              "author": "",
+              "link_title": "SHOP THE LEATHER SEAT CHAIR",
+              "link": "#"
+            }
+          },
+          "1512714496227": {
+            "type": "press",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/press2.png",
+              "date": "VOGUE – NOVEMBER 2017",
+              "title": "IN HONOR OF THEIR UPCOMING STORE, ROMAN AND WILLIAMS SHARE THEIR TIPS FOR CREATING THE MOST COMPELLING SPACE",
+              "summary": "",
+              "author": "BY CHRISTINA PÉREZ",
+              "link_title": "READ THE ARTICLE ON VOGUE.COM",
+              "link": "#"
+            }
+          },
+          "1512714572163": {
+            "type": "press",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/press4.png",
+              "date": "WSJ MAGAZINE – NOVEMBER 2017",
+              "title": "DESIGN INNOVATOR: ROMAN AND WILLIAMS",
+              "summary": "Robin Standefer and Stephen Alesch’s firm is known for fantastical spaces— just ask Gwyneth Paltrow, Anthony Bourdain and the curators at the Metropolitan Museum of Art. Now the partners expand their vision with their first retail store in New York City.",
+              "author": "BY SARAH MEDFORD",
+              "link_title": "",
+              "link": "#"
+            }
+          },
+          "1512714655483": {
+            "type": "press",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/press6.png",
+              "date": "ALEXA – OCTOBER 2017",
+              "title": "BY THE NUMBERS: ROBIN STANDEFER & STEPHEN ALESCH",
+              "summary": "",
+              "author": "",
+              "link_title": "SHOP THE BED",
+              "link": "#"
+            }
+          }
+        },
+        "block_order": [
+          "1512714281843",
+          "1512714538770",
+          "1512714612836",
+          "1512714496227",
+          "1512714572163",
+          "1512714655483"
+        ],
+        "settings": {
+          "hero_image": "shopify:\/\/shop_images\/AG_GUILD_03856.jpg",
+          "sub_title1": "<p>LOREMOR NEWS&nbsp;<\/p>",
+          "text_overlay1": "Git omnimus aliquiaes quat porerio nsequiam qui cumquiae  optae verfero blameni dolupta spiendi core aut odionsequi  ipidi ditium volorepel"
+        }
+      }
+    },
+    "content_for_index": [
+      "1510668308194",
+      "1510674680540",
+      "1510754234884",
+      "1510751524963",
+      "1510762946804",
+      "1510751532244"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "collection-list": {
+          "type": "collection-list",
+          "blocks": {
+            "collection-list-0": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-list-1": {
+              "type": "collection",
+              "settings": {}
+            },
+            "collection-list-2": {
+              "type": "collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "collection-list-0",
+            "collection-list-1",
+            "collection-list-2"
+          ],
+          "settings": {}
+        },
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "collection-list",
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

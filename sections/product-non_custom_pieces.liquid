@@ -1,0 +1,99 @@
+{% for image in product.images %}
+{%- assign product_images = product_images | append: ',' | append: image.src -%}
+{% endfor %}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+{% assign product_image = product_images | split:',' %}
+<div data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+  
+  <div class="intro">
+    <figure class="intro__image fullsize-image" style="background-image: url({{ product.featured_image | product_img_url: 'master'}}"></figure><!-- /.intro__image -->
+  </div><!-- /.intro -->
+
+  <section class="section-secondary">
+    <div class="shell shell--secondary">
+      <div class="section__inner">
+        <div class="section__content">
+
+          {% include 'breadcrumbs' %}
+
+          <h2>{{ product.title }}</h2>
+          {{ product.description | split:"~section 1~" | first}}
+        </div><!-- /.section__content -->
+
+        <aside class="section__aside">
+          <strong class="price">FROM USD {{ product.price | money_without_trailing_zeros | split:'$' | last}}</strong>
+
+          {{ product.description | split: "~section 1~" | last | split: "~section 2~" | first }}
+
+          <a href="#add_to_cart_form" class="link-primary link-primary--alt">Acquire</a>
+        </aside><!-- /.section__aside -->
+      </div><!-- /.section__inner -->
+    </div><!-- /.shell shell-/-secondary -->
+  </section><!-- /.section-secondary -->
+
+  <section class="section-gallery section--black">
+    <div class="gallery-items gallery-item--alt">
+      <div class="gallery-item gallery-item--large cols">
+        <figure class="gallery-item__image col col--1of2">
+          <a href="{{ product_image[2] | product_img_url:'master' }}">
+            <img src="{{ product_image[2] | product_img_url:'master' }}" alt="">
+			{{ product.description | split: "~section 2~" | last | split: "~section 3~" | first }}
+          </a>
+        </figure><!-- /.gallery-item__image -->
+
+        <div class="gallery-item__content col col--1of2">
+          {{ product.description | split: "~section 2~" | last | split: "~section 3~" | first }}
+        </div><!-- /.gallery-item__content -->
+      </div><!-- /.gallery-item -->
+    </div><!-- /.gallery-items -->
+
+    <footer class="section__foot">
+      <div class="shell shell--secondary">
+        <div class="section__foot-image">
+          <img src="{{ product_image[3] | product_img_url:'master' }}" alt="">
+        </div><!-- /.section__foot-image -->
+      </div><!-- /.shell -->
+    </footer><!-- /.section__foot -->
+  </section><!-- /.section-gallery -->
+
+  <section class="section-product section--black">
+    <div class="shell shell--secondary">
+      {% include "product-details" %}
+
+      {% include "product-form" %}
+      
+      {% include "product-featured-article" %}
+    </div><!-- /.shell shell-/-secondary -->
+  </section><!-- /.section-product -->
+
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "class": "produt-non_custom_pieces",
+  "settings": [
+
+  ],
+  "blocks": [
+  	{
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "content_article",
+          "label": "Article"
+        }
+      ]
+    }
+  ]
+
+ }
+{% endschema %}
